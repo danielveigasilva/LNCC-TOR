@@ -1,4 +1,4 @@
-#include<stdio.h> //teste novo 234
+#include<stdio.h> //oi
 #include<unistd.h>
 #include<sys/socket.h>	//Biblioteca para Sockets
 #include<sys/types.h>	//
