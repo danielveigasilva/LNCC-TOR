@@ -1,4 +1,4 @@
-#include<stdio.h> //teste
+#include<stdio.h> //testtu
 #include<unistd.h>
 #include<sys/socket.h>	//Biblioteca para Sockets
 #include<sys/types.h>	//
