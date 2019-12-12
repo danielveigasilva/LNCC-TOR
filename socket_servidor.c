@@ -2,7 +2,7 @@
 #include<unistd.h>
 #include<sys/socket.h>	//Biblioteca para Sockets
 #include<sys/types.h>	//
-#include<errno.h>	//Biblioteca para descricao de erros
+#include<errno.h>		//Biblioteca para descricao de erros
 #include<netinet/in.h>	//Biblioteca para structs de sockets
 #include<arpa/inet.h>
 #include<string.h>

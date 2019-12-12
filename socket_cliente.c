@@ -1,8 +1,8 @@
-#include<stdio.h> //
+#include<stdio.h>
 #include<unistd.h>
 #include<sys/socket.h>	//Biblioteca para Sockets
 #include<sys/types.h>	//
-#include<errno.h>	//Biblioteca para descricao de erros
+#include<errno.h>		//Biblioteca para descricao de erros
 #include<netinet/in.h>	//Biblioteca para structs de sockets
 #include<arpa/inet.h>
 #include<string.h>
@@ -150,7 +150,7 @@ int main()
 	char TipoConexao;
 
 	//Dados Servidor defaul------------------
-	strcpy(enderecoServer, "10.0.2.15");
+	strcpy(enderecoServer, "192.168.0.14");
 	portaServer = 8008;
 	TipoConexao = 'n';
 	//---------------------------------------
@@ -276,7 +276,7 @@ int main()
 	{
 
 		printf("|___Montando Circuito TOR...\n");
-		char Relays[3][16] = {"10.0.2.15:8080\0","10.0.2.15:7777\0","10.0.2.15:8118\0"};
+		char Relays[3][18] = {"192.168.0.14:8080\0","192.168.0.14:7777\0","192.168.0.14:8118\0"};
 
 		printf("		|___Insira os Enderecos de Relays:\n");
 		printf("		    |___Guard:	%s\n", Relays[0]);
