@@ -210,7 +210,7 @@ int main()
 			{
 				char opcao = buffer_mensagem_out[1]; // Armazena caracter da opcao
 
-				//Dicionario de opcoes-------------------------------------------------------------------------------------------
+				//Dicionario de opcoes-----------------------------------------------------------------------
 				switch (opcao)
 				{
 					case '?': // Ajuda
@@ -222,9 +222,8 @@ int main()
 					case 'e': // Envia texto encriptado em AES
 
 						sscanf(buffer_mensagem_out,"-e %[^\n]s", texto_claro);
-
 						AES_Envia(AES_Encripta(DH_GeraChave(socket_cliente), texto_claro), socket_cliente);	
-
+						
 						if (recv(socket_cliente, buffer_mensagem_in, sizeof(buffer_mensagem_in), 0) > 0)
 							printf("	|___Retorno Servidor: %s\n", buffer_mensagem_in);	
 					
@@ -233,7 +232,6 @@ int main()
 					case 'd': // Ignora -d
 
 						sscanf(buffer_mensagem_out,"-d%[^\n]s", buffer_mensagem_out);
-						
 						send(socket_cliente, buffer_mensagem_out, strlen(buffer_mensagem_out), 0);
 
 					break;
@@ -255,6 +253,7 @@ int main()
 					break;
 
 				}
+				//-------------------------------------------------------------------------------------------
 			}
 			else // Caso não receba parametro apenas transmite mensagem
 			{
@@ -279,7 +278,7 @@ int main()
 		//Monta Circuito TOR-----------------------
 		printf("|___Montando Circuito TOR...\n");
 
-		//Deful Realys: [IP]:[Porta]--------
+		//Deful Realys: [IP]:[Porta]------------
 		struct _relay{
 			char IP[40];
 			int porta;
@@ -292,7 +291,7 @@ int main()
 		Relays[0].porta = 8008;
 		Relays[1].porta = 7777;
 		Relays[2].porta = 8118;
-		//---------------------------------
+		//--------------------------------------
 
 		//Obtem enderecos dos Relays---------------------------------
 		printf("		|___Insira os Enderecos dos Relays:\n");
@@ -328,7 +327,7 @@ int main()
 		memset(buffer_mensagem_out, 0x0, tM); // Limpa buffer de saida
 
 
-		//Conectando ao Relay Guard-------------------------------------------------------------------------
+		//Conectando ao Relay Guard--------------------------------------------------------------------------------
 		if (connect(socket_cliente, (struct sockaddr*) &addr_Relay_Guard, sizeof(addr_Relay_Guard)) == -1) 
 		{
 			printf("\033[0;31m");
@@ -344,7 +343,7 @@ int main()
 			printf("\033[0m");		
 			printf("	|___Guard Disse: %s\n", buffer_mensagem_in);
 	  	}
-		//--------------------------------------------------------------------------------------------------
+		//--------------------------------------------------------------------------------------------------------
 		
 		//Diffie-Hellman: Pega Chaves dos Relays--------------------------------------------------
 		
@@ -367,7 +366,7 @@ int main()
 		strcat(texto_claro, ":");				// : para concatenar
 		char porta[10];
 		sprintf(porta, "%d", Relays[1].porta);
-		strcat(texto_claro, porta);	// Passa porta do Middle
+		strcat(texto_claro, porta);				// Passa porta do Middle
 		//---------------------------------------------------------------------------------------
 
 		//Utiliza chave do Guard para criptografar e enviar celula destinada a Middle------------
@@ -381,9 +380,9 @@ int main()
 		}
 		//--------------------------------------------------------------------------------------
 
-		memset(texto_claro, 0x0, tM);	//Limpa memoria da buffer
-		strcpy(texto_claro, "-p ");		//Cria celula do tipo Proximo 
-		send(socket_cliente, texto_claro, strlen(texto_claro), 0); //Envia celula
+		memset(texto_claro, 0x0, tM);								//Limpa memoria da buffer
+		strcpy(texto_claro, "-p ");									//Cria celula do tipo Proximo 
+		send(socket_cliente, texto_claro, strlen(texto_claro), 0); 	//Envia celula
 
 		//Cria celula do tipo Inicio-------------------------------------------------------------
 		memset(texto_claro, 0x0, tM); 			//Limpa memoria da buffer
